@@ -4,6 +4,7 @@ import { Col, Row } from "react-bootstrap";
 const styleDeclarations = {
   containerBg: {
     backgroundColor: "#fff",
+    padding: "2rem",
   },
   boundedBox: {
     backgroundColor: "var(--globalGrey)",
@@ -17,6 +18,9 @@ const styleDeclarations = {
     display: "flex",
     justifyContent: "space-between",
   },
+  onHoverDiv: {
+    cursor: "pointer",
+  },
 };
 
 const Display = ({ data, updateSort }) => {
@@ -27,10 +31,28 @@ const Display = ({ data, updateSort }) => {
         <Col lg={2}></Col>
         <Col lg={8} style={styleDeclarations.sortingContent}>
           <div>Sort By</div>
-          <div onClick={() => updateSort("location")}>Location</div>
-          <div onClick={() => updateSort("job_type")}>Role</div>
-          <div onClick={() => updateSort("department")}>Department</div>
-          <div onClick={() => updateSort("required_credentials")}>
+          <div
+            style={styleDeclarations.onHoverDiv}
+            onClick={() => updateSort("location")}
+          >
+            Location
+          </div>
+          <div
+            style={styleDeclarations.onHoverDiv}
+            onClick={() => updateSort("job_type")}
+          >
+            Role
+          </div>
+          <div
+            style={styleDeclarations.onHoverDiv}
+            onClick={() => updateSort("department")}
+          >
+            Department
+          </div>
+          <div
+            style={styleDeclarations.onHoverDiv}
+            onClick={() => updateSort("required_credentials")}
+          >
             Education
           </div>
           <div onClick={() => updateSort("experience")}>Experience</div>

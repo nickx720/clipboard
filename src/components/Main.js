@@ -44,19 +44,23 @@ const Main = () => {
     console.log(Object.values(sort).includes(true));
     let query;
     let filter = "";
-    if (Object.values(sort).includes(true)) {
-      for (const [key, value] of Object.entries(sort)) {
-        if (value) {
-          filter += `&${key}.asc`;
-        }
+
+    for (const [key, value] of Object.entries(sort)) {
+      if (value) {
+        filter += `&${key}.asc`;
+      } else {
+        filter += `&${key}.desc`;
       }
     }
+
     if (debouncedText.length === 0 && !Object.values(sort).includes(true)) {
       query = `/api/jobs`;
-    } else if (input.length > 0) {
+    } else if (input.length > 0 && !Object.values(sort).includes(true)) {
       query = `/api/jobs?search=${debouncedText}`;
     } else if (Object.values(sort).includes(true)) {
-      query = `/api/jobs?${filter}`;
+      query = `/api/jobs?sortby=${filter.substring(1)}`;
+    } else {
+      query = `/api/jobs?search=${debouncedText}&sortby=${filter.substring(1)}`;
     }
     fetch(query)
       .then((json) => json.json())

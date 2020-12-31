@@ -4,6 +4,7 @@ import { Col, Row } from "react-bootstrap";
 const styleDeclarations = {
   containerColor: {
     backgroundColor: "#fff",
+    padding: "2rem",
   },
   headerValue: {
     textTransform: "capitalize",
