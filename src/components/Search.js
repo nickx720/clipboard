@@ -14,16 +14,17 @@ const styleDeclaration = {
   },
 };
 
-const Search = () => {
+const Search = ({ onHandleChange }) => {
   return (
     <React.Fragment>
       <Row className="mt-5">
         <Col lg={12}>
-          <Form inline>
+          <Form inline onSubmit={(e) => e.preventDefault()}>
             <FormControl
               type="text"
-              placeholder="Search"
+              placeholder="Search for any title,name"
               style={styleDeclaration.magnifier}
+              onChange={onHandleChange}
             />
           </Form>
         </Col>
