@@ -1,26 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 
 const styleDeclarations = {
   containerColor: {
     backgroundColor: "#fff",
   },
+  headerValue: {
+    textTransform: "capitalize",
+  },
 };
 
 const SideBar = () => {
-  const [container, setContainer] = useState([1, 2, 3]);
+  const [container, setContainer] = useState({});
+
+  useEffect(() => {
+    fetch("/api/filters")
+      .then((json) => json.json())
+      .then((value) => setContainer(value));
+  }, []);
   return (
     <React.Fragment>
-      {container.length > 0 &&
-        container.map((x) => (
-          <Col>
+      {Object.keys(container).length > 0 &&
+        Object.keys(container).map((x) => (
+          <Col key={x}>
             <Row className="mb-5" style={styleDeclarations.containerColor}>
               <Col>
                 <div>
-                  <h5>Hello</h5>
-                  <p>
-                    <span>Content</span>
-                  </p>
+                  <h5 style={styleDeclarations.headerValue}>
+                    {x.split("_").join(" ")}
+                  </h5>
+                  {container[x].map(({ key, doc_count }) => (
+                    <p key={key}>
+                      <span>{key}</span>
+                      <span>{doc_count}</span>
+                    </p>
+                  ))}
                 </div>
               </Col>
             </Row>
